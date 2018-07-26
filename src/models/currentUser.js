@@ -35,8 +35,7 @@ export default {
       const { authCode } = yield select(state => state.currentUser);
       const { data } = yield call(redirect, {
         auth_code: authCode,
-        env: 'develop',
-        redirect_url: 'https://weixin.flexceed.com'
+        env: window.env,
       })
       if (data) {
         const corpId = _.get(data, 'corp_id');
