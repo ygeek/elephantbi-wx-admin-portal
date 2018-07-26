@@ -1,7 +1,5 @@
 import pathToRegexp from 'path-to-regexp';
 import { redirect } from '../services/example'
-import { parseCookie } from 'utils/cookie_helper';
-import { env } from '../constants/APIConstants'
 
 export default {
   namespace: 'currentUser',
@@ -33,7 +31,7 @@ export default {
       const { authCode } = yield select(state => state.currentUser);
       yield call(redirect, {
         auth_code: authCode,
-        env,
+        env: window.env,
         redirect_url: 'https://weixin.flexceed.com'
       })
     },
