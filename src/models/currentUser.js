@@ -13,6 +13,8 @@ export default {
     setup({ dispatch, history }) {
       history.listen((location) => {
         const { pathname, search } = location;
+        console.log('location', location)
+        console.log('search', search)
         const match = pathToRegexp('/(.*)').exec(pathname);
         console.log('match', match)
         if (match) {
