@@ -26,3 +26,11 @@ export async function fetchDashBoardList(id, params) {
     params,
   })
 }
+
+export async function fetchDataSourceList(id, params) {
+  return requestSimple({
+    url: `/user/${id}/ds/list`,
+    method: 'GET',
+    params,
+  })
+}
