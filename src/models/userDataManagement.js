@@ -8,6 +8,10 @@ export default {
   
   state: {
     userInfo: [],
+    pageInfo: {
+      page: 1,
+      pageSize: 20
+    }
   },
   
   subscriptions: {
@@ -24,7 +28,11 @@ export default {
   
   effects: {
     * fetchUserInfoList(action, { select, call, put }) {
-      const { data } = yield call(fetchUserInfoList);
+      const { pageInfo } = yield select(state => state.userDataManagement)
+      const { data } = yield call(fetchUserInfoList, {
+        page: pageInfo.page,
+        page_size: pageInfo.pageSize
+      });
       if (data) {
         yield put({ type: 'setUserInfoList', payload: data });
       }
@@ -40,6 +48,9 @@ export default {
   reducers: {
     setUserInfoList(state, { payload }) {
       return { ...state, userInfo: payload }
+    },
+    setPageInfo(state, { payload }) {
+      return { ...state, pageInfo: payload }
     }
   }
 }

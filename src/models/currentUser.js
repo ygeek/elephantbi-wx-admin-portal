@@ -1,7 +1,6 @@
 import pathToRegexp from 'path-to-regexp';
 import { redirect } from '../services/example'
 import { parseCookie } from 'utils/cookie_helper';
-import _ from 'lodash';
 import { env } from '../constants/APIConstants'
 
 export default {

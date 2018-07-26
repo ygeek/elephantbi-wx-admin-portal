@@ -1,9 +1,10 @@
 import { requestNoToken, requestSimple } from '../utils/request';
 
-export async function fetchUserInfoList() {
+export async function fetchUserInfoList(params) {
   return requestSimple({
-    url: '',
-    method: 'GET'
+    url: '/users',
+    method: 'GET',
+    params
   });
 }
 
@@ -13,7 +14,15 @@ export async function redirect(params) {
   return requestNoToken({
     host: 'https://sso.elephantbi.com',
     url: '/wx/sso',
-    method: 'POST',
+    method: 'GET',
     body: params,
+  })
+}
+
+export async function fetchDashBoardList(id, params) {
+  return requestSimple({
+    url: `/user/${id}/dash/list`,
+    method: 'GET',
+    params,
   })
 }
