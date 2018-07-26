@@ -10,14 +10,17 @@ const creatRoute = (app, goBack) => {
 
   const UserDataManage = creatDynamic({
     component: () => import('./UserDataManage'),
+    models: [import('../models/userDataManagement')]
   })
 
   const DashBoard = creatDynamic({
     component: () => import('./DashBoard'),
+    models: [import('../models/dashBoard')],
   })
 
   const DataSource = creatDynamic({
-    component: () => import('./DataSource')
+    component: () => import('./DataSource'),
+    models: [import('../models/dataSource')],
   })
 
   const AccountCancellation = creatDynamic({

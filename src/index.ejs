@@ -7,6 +7,16 @@
 </head>
 <body>
   <div id="root"></div>
-  <script>window.host = 'https://api.elephantbi.com';</script>
+  <script>
+    const host = window.location.hostname;
+    const match = host.match(/^(\w+).((\w+.)+\w+)$/) || [];
+    window.baseurl = 'https://api.elephantbi.com';
+    const fronturlbaseMatch = window.location.hostname.match(/^\w+.((\w+.)+\w+)$/) || [];
+    window.fronturl = fronturlbaseMatch[1];
+    const matchBaseUrl = /^(.*)\/\/(.*)$/.exec(window.baseurl) || [];
+    const windowHost = matchBaseUrl[1] + '//' + match[1] + '.' + matchBaseUrl[2];
+    window.host = windowHost;
+  </script>
+  <!-- <script>window.host = "https://res.wx.qq.com/open/js/jweixin-1.2.0.js";</script> -->
 </body>
 </html>

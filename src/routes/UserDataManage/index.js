@@ -5,7 +5,8 @@ import { connect } from 'dva';
 import columns from './column';
 import styles from './index.less'
 
-const UserDataManage = ({ dispatch }) => {
+const UserDataManage = ({ dispatch, userDataManagement }) => {
+  const { userInfo } = userDataManagement
   return (
     <div className={styles.container}>
       <div className={styles.title}>用户管理</div>
@@ -25,4 +26,8 @@ const UserDataManage = ({ dispatch }) => {
   )
 }
 
-export default connect()(UserDataManage);
+const mapStateToProps = ({ userDataManagement }) => ({
+  userDataManagement
+})
+
+export default connect(mapStateToProps)(UserDataManage);
