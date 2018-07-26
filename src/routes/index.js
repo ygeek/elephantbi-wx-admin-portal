@@ -29,14 +29,7 @@ const creatRoute = (app, goBack) => {
 
   return (
     <Switch>
-      <Route
-        exact
-        path="/"
-        component={() => {
-          return (<Redirect to="/userDataManage" />);
-        }}
-      />
-      <Route path="/userDataManage" component={UserDataManage} />
+      <Route exact path="/" component={UserDataManage} />
       <Route path="/dashBoard/:id" component={DashBoard} />
       <Route path="/dataSource/:id" component={DataSource} />
       <Route path="/accountCancellation" component={AccountCancellation} />

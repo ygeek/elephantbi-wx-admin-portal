@@ -10,7 +10,7 @@ import styles from './index.less'
 const DashBoard = ({ dispatch, dashBoard }) => {
   const { dashBoardList, pageInfo, currentViewUser } = dashBoard
   const toUserList = () => {
-    dispatch(routerRedux.push('/userDataManage'))
+    dispatch(routerRedux.push('/'))
   }
   return (
     <div className={styles.container}>

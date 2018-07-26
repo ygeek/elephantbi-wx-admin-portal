@@ -11,7 +11,7 @@ const { TabPane } = Tabs;
 const Navigator = ({ dispatch }) => {
   const tabsOnChange = (key) => {
     if (key === "1") {
-      dispatch(routerRedux.push('/userDataManage'))
+      dispatch(routerRedux.push('/'))
     }
     if (key === '2') {
       dispatch(routerRedux.push('/accountCancellation'))

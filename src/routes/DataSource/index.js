@@ -9,7 +9,7 @@ import styles from './index.less'
 
 const DataSource = ({ dispatch, dataSource }) => {
   const toUserList = () => {
-    dispatch(routerRedux.push('/userDataManage'))
+    dispatch(routerRedux.push('/'))
   }
   const { dataSourceList, currentViewUser, pageInfo } = dataSource
   return (
