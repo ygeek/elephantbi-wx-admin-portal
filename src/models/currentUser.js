@@ -14,8 +14,10 @@ export default {
       history.listen((location) => {
         const { pathname, search } = location;
         const match = pathToRegexp('/(.*)').exec(pathname);
+        console.log('match', match)
         if (match) {
           const matchAuthCode = search.match(/auth_code=(\w*)/)
+          console.log('matchAuthCode', matchAuthCode)
           if (matchAuthCode) {
             const authCode = matchAuthCode[1];
             dispatch({ type: 'setAuthCode', payload: authCode })
@@ -31,7 +33,7 @@ export default {
       const { authCode } = yield select(state => state.currentUser);
       yield call(redirect, {
         auth_code: authCode,
-        env: window.env,
+        env: 'develop',
         redirect_url: 'https://weixin.flexceed.com'
       })
     },
