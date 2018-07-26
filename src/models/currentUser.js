@@ -42,6 +42,7 @@ export default {
         const token = _.get(data, 'access_token');
         yield put({ type: 'setToken', payload: token })
         yield put({ type: 'setCorpId', payload: corpId })
+        window.location.href = 'https://weixin.flexceed.com'
       }
     },
   },
