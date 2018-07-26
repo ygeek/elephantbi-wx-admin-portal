@@ -13,13 +13,17 @@ export default {
     setup({ dispatch, history }) {
       history.listen((location) => {
         const { pathname, search } = location;
+        console.log('search', search)
         const match = pathToRegexp('/(.*)').exec(pathname);
         if (match) {
-          if (window.location.href.indexOf('auth_code') > -1) {
-            const matchAuthCode =  /auth_code=(.*)#\/$/.exec(window.location.href)
-            const authCode = matchAuthCode[1];
-            dispatch({ type: 'setAuthCode', payload: authCode })
-            dispatch({ type: 'login' });
+          if (search) {
+            const matchSearch = search.match(/auth_code=(.*)/)
+            console.log('matchSearch', matchSearch)
+            if (matchSearch) {
+              const authCode = matchSearch[1]
+              dispatch({ type: 'setAuthCode', payload: authCode });
+              dispatch({ type: 'login' })
+            }
           }
         }
       })

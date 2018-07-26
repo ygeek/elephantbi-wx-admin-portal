@@ -1,7 +1,10 @@
 import dva from 'dva';
+import createHistory from 'history/createBrowserHistory';
 import './global.css';
 
-const app = dva();
+const app = dva({
+  history: createHistory(),
+});
 
 app.use({
   onStateChange: () => {
