@@ -23,26 +23,6 @@ app.use({
   app.model(require(`./models/${fileName}.js`).default);
 });
 
-app.use({
-  onStateChange: () => {
-    const state = app._store.getState();
-    const { currentUser } = state;
-
-    localStorage.setItem('reduxState', JSON.stringify({
-      currentUser
-    }));
-  }
-});
-
-[
-  'currentUser',
-  'userDataManagement',
-  'dashBoard',
-  'dataSource',
-].forEach((fileName) => {
-  app.model(require(`./models/${fileName}.js`).default);
-});
-
 app.router(require('./router').default);
 
 app.start('#root');
