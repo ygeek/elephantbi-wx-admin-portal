@@ -1,7 +1,5 @@
 import pathToRegexp from 'path-to-regexp';
 import { fetchUserInfoList } from 'services/example.js'
-import _ from 'lodash';
-import { parseCookie } from 'utils/cookie_helper';
 
 export default {
   namespace: 'userDataManagement',
@@ -29,6 +27,9 @@ export default {
   effects: {
     * fetchUserInfoList(action, { select, call, put }) {
       const { pageInfo } = yield select(state => state.userDataManagement)
+      console.log('env', window.env)
+      console.log('host', window.host)
+      console.log('backend_url', window.backendUrl)
       const { data } = yield call(fetchUserInfoList, {
         page: pageInfo.page,
         page_size: pageInfo.pageSize
