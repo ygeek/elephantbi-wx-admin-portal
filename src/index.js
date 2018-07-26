@@ -2,9 +2,7 @@ import dva from 'dva';
 import createHistory from 'history/createBrowserHistory';
 import './global.css';
 
-const app = dva({
-  history: createHistory(),
-});
+const app = dva();
 
 app.use({
   onStateChange: () => {
