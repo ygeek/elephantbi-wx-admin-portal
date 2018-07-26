@@ -15,7 +15,7 @@ export async function redirect(params) {
     host: 'https://sso.elephantbi.com',
     url: '/wx/sso',
     method: 'GET',
-    body: params,
+    params,
   })
 }
 

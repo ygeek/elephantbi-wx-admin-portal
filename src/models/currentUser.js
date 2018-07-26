@@ -34,7 +34,7 @@ export default {
       yield call(redirect, {
         auth_code: authCode,
         env,
-        redirect_url: 'https://weixin.flexceed.com/userDataManage'
+        redirect_url: 'https://weixin.flexceed.com'
       })
     },
   },
