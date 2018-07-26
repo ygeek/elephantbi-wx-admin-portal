@@ -1,4 +1,4 @@
-const columns = () => {
+const columns = (dispatch) => {
   return [
     {
       key: 'id',
@@ -40,7 +40,12 @@ const columns = () => {
       title: '操作',
       render(text, record) {
         return (
-          <a onClick={() => {}}>删除</a>
+          <a
+          onClick={() => {
+            dispatch({ type: 'dataSource/deleteDataSource', payload: record.id })
+          }}>
+            删除
+          </a>
         )
       }
     }

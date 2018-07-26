@@ -1,5 +1,5 @@
 import pathToRegexp from 'path-to-regexp';
-import { fetchUserInfoList, fetchDashBoardList } from 'services/example.js'
+import { fetchUserInfoList, fetchDashBoardList, deleteDashBoard } from 'services/example.js'
 import _ from 'lodash'
 
 export default {
@@ -47,6 +47,14 @@ export default {
       });
       if (data) {
         yield put({ type: 'setDashBoardList', payload: data })
+      }
+    },
+
+    * deleteDashBoard({ payload }, { select, call, put }) {
+      const { data } = yield call(deleteDashBoard, payload);
+      if (data) {
+        yield put({ type: 'setPageInfo', payload: { page: 1, pageSize: 20 } })
+        yield put({ type: 'fetchDashBoardList' })
       }
     }
   },

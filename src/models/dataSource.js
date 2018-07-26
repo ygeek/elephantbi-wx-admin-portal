@@ -1,5 +1,5 @@
 import pathToRegexp from 'path-to-regexp';
-import { fetchUserInfoList, fetchDataSourceList } from 'services/example.js'
+import { fetchUserInfoList, fetchDataSourceList, deleteDataSource } from 'services/example.js'
 import _ from 'lodash'
 
 export default {
@@ -47,6 +47,14 @@ export default {
       });
       if (data) {
         yield put({ type: 'setDataSourceList', payload: data })
+      }
+    },
+
+    * deleteDataSource({ payload }, { select, call, put }) {
+      const { data } = yield call(deleteDataSource, payload)
+      if (data) {
+        yield put({ type: 'setPageInfo', payload: { page: 1, pageSize: 20 } })
+        yield put({ type: 'fetchDataSourceList' })
       }
     }
   },

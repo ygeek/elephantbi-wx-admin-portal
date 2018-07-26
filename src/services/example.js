@@ -34,3 +34,17 @@ export async function fetchDataSourceList(id, params) {
     params,
   })
 }
+
+export async function deleteDashBoard(id) {
+  return requestSimple({
+    url: `/dash/${id}`,
+    method: 'delete'
+  })
+}
+
+export async function deleteDataSource(id) {
+  return requestSimple({
+    url: `/ds/${id}`,
+    method: 'delete'
+  })
+}

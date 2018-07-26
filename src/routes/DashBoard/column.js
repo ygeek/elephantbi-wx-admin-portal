@@ -1,4 +1,4 @@
-const columns = () => {
+const columns = (dispatch) => {
   return [
     {
       title: 'ID',
@@ -23,9 +23,14 @@ const columns = () => {
     {
       title: '操作',
       key: 'operator',
-      render() {
+      render(text, record) {
         return (
-          <a onClick={() => {}}>删除</a>
+          <a
+            onClick={() => {
+              dispatch({ type: 'dashBoard/deleteDashBoard', payload: record.id })
+            }}>
+            删除
+        </a>
         )
       }
     }
