@@ -35,7 +35,7 @@ export default {
         page_size: pageInfo.pageSize
       });
       if (data) {
-        yield put({ type: 'setUserInfoList', payload: data });
+        yield put({ type: 'setUserInfoList', payload: data.list });
       }
     },
   },
