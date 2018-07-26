@@ -20,6 +20,10 @@ const creatRoute = (app, goBack) => {
     component: () => import('./DataSource')
   })
 
+  const AccountCancellation = creatDynamic({
+    component: () => import('./AccountCancellation'),
+  })
+
   return (
     <Switch>
       <Route
@@ -32,6 +36,7 @@ const creatRoute = (app, goBack) => {
       <Route path="/userDataManage" component={UserDataManage} />
       <Route path="/dashBoard/:id" component={DashBoard} />
       <Route path="/dataSource/:id" component={DataSource} />
+      <Route path="/accountCancellation" component={AccountCancellation} />
     </Switch>
   )
 }

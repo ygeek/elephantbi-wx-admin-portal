@@ -1,7 +1,22 @@
 .container {
   height: 100%;
-  width: 100%;
+  width: 1200px;
+  margin: auto;
   .content {
     height: calc(~"100% - 50px");
+    width: 1000px;
+    margin: auto;
+  }
+}
+
+:global(.ant-table-pagination) {
+  float: none !important;
+  text-align: center;
+}
+
+:global(.ant-table) {
+  th, td {
+    font-size: 12px !important;
+    padding: 10px !important;
   }
 }
