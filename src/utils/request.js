@@ -8,6 +8,13 @@ function parseJSON(response) {
   return response.json();
 }
 
+const getHost = () => {
+  const storageState = JSON.parse(localStorage.getItem('reduxState'));
+  const corpId = _.get(storageState, 'currentUser.corpId');
+  const matchHost = /^(.*)\/\/(.*)$/.exec(HOST)
+  return `${matchHost[1]}//wx_${corpId}.${matchHost[2]}`
+}
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -19,7 +26,7 @@ function checkStatus(response) {
 }
 
 export function requestUrl({ host, url, params }) {
-  const reqHost = host || HOST;
+  const reqHost = host || getHost();
   const queryString = _.isEmpty(params) ? '' : jsonToQuery(params);
   if (queryString) {
     return `${urljoin(reqHost, url)}${queryString}`;

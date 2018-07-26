@@ -14,10 +14,7 @@ const UserDataManage = ({ dispatch, userDataManagement }) => {
       <div>
         <Table
           columns={columns(dispatch)}
-          dataSource={[{
-            name: 1,
-            id: 1,
-          }]}
+          dataSource={userInfo}
           pagination={{
             current: _.get(pageInfo, 'page', 1),
             pageSize: _.get(pageInfo, 'pageSize', 20),

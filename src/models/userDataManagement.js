@@ -18,9 +18,9 @@ export default {
     setup({ dispatch, history }) {
       history.listen((location) => {
         const { pathname } = location;
-        const match = pathToRegexp('/userDataManage').exec(pathname)
+        const match = pathToRegexp('/').exec(pathname)
         if (match) {
-          dispatch({ type: 'getToken' });
+          dispatch({ type: 'fetchUserInfoList' })
         }
       })
     }
@@ -37,12 +37,6 @@ export default {
         yield put({ type: 'setUserInfoList', payload: data });
       }
     },
-    * getToken(action, { select, call, put }) {
-      const cookie = parseCookie();
-      const token = _.get(cookie, 'BI_TOKEN');
-      yield put({ type: 'currentUser/setToken', payload: token });
-      yield put({ type: 'fetchUserInfoList' })
-    }
   },
   
   reducers: {
