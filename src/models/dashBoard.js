@@ -14,6 +14,7 @@ export default {
       pageSize: 20,
     },
     total: 0,
+    loading: 0,
   },
   
   subscriptions: {
@@ -33,15 +34,18 @@ export default {
   
   effects: {
     * fetchUsers(action, { select, call, put }) {
+      yield put({ type: 'changeLoading', payload: 'add' })
       const { userId } = yield select(state => state.dashBoard);
       const { data } = yield call(fetchUserInfoList);
       if (data) {
         const currentViewUser = _.find(data, { id: parseInt(userId, 10) });
         yield put({ type: 'setCurrentViewUser', payload: currentViewUser })
       }
+      yield put({ type: 'changeLoading', payload: 'sub' })
     },
 
     * fetchDashBoardList(action, { select, call, put }) {
+      yield put({ type: 'changeLoading', payload: 'add' })
       const { userId, pageInfo } = yield select(state => state.dashBoard);
       const { data } = yield call(fetchDashBoardList, userId, {
         page: pageInfo.page,
@@ -51,14 +55,17 @@ export default {
         yield put({ type: 'setDashBoardList', payload: data.list })
         yield put({ type: 'setTotalCount', payload: _.get(data, 'meta.total_count') })
       }
+      yield put({ type: 'changeLoading', payload: 'sub' })
     },
 
     * deleteDashBoard({ payload }, { select, call, put }) {
+      yield put({ type: 'changeLoading', payload: 'add' })
       const { data } = yield call(deleteDashBoard, payload);
       if (data) {
         yield put({ type: 'setPageInfo', payload: { page: 1, pageSize: 20 } })
         yield put({ type: 'fetchDashBoardList' })
       }
+      yield put({ type: 'changeLoading', payload: 'sub' })
     }
   },
   
@@ -93,7 +100,11 @@ export default {
           pageSize: 20,
         },
         total: 0,
+        loading : 0
       }
+    },
+    changeLoading(state, { payload }) {
+      return { ...state, loading: payload === 'add' ? state.loading + 1 : state.loading - 1 }
     }
   }
 }

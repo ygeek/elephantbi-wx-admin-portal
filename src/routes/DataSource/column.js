@@ -37,7 +37,7 @@ const columns = (dispatch) => {
       title: '创建时间',
       dataIndex: 'created_at',
       render(text, record) {
-        return moment(text).format('YYYY-MM-DD')
+        return moment(text).format('YYYY-MM-DD HH:mm:ss')
       }
     },
     {
@@ -45,7 +45,7 @@ const columns = (dispatch) => {
       title: '修改时间',
       dataIndex: 'updated_at',
       render(text, record) {
-        return moment(text).format('YYYY-MM-DD')
+        return moment(text).format('YYYY-MM-DD HH:mm:ss')
       }
     },
     {

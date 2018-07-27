@@ -16,7 +16,7 @@ const columns = (dispatch) => {
       key: 'created_at',
       dataIndex: 'created_at',
       render(text, record) {
-        return moment(text).format('YYYY-MM-DD')
+        return moment(text).format('YYYY-MM-DD HH:mm:ss')
       }
     },
     {
@@ -24,7 +24,7 @@ const columns = (dispatch) => {
       key: 'updated_at',
       dataIndex: 'updated_at',
       render(text, record) {
-        return moment(text).format('YYYY-MM-DD')
+        return moment(text).format('YYYY-MM-DD HH:mm:ss')
       }
     },
     {

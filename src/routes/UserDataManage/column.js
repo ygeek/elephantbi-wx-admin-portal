@@ -41,6 +41,14 @@ const columns = (dispatch) => {
             }}>
               仪表盘
             </a>
+            <div style={{
+              display: 'inline-block',
+              width: 0,
+              height: '14px',
+              margin: '0 5px',
+              marginBottom: '-3px',
+              border: '0.5px solid #aaa'
+            }} />
             <a onClick={() => {
               dispatch(routerRedux.push(`/dataSource/${id}`))
             }}>
