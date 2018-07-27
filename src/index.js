@@ -3,7 +3,6 @@ import createHistory from 'history/createBrowserHistory';
 import './global.css';
 
 const getInitialState = () => {
-  console.log('pppppppppppppp', localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {})
   return localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {};
 };
 
@@ -16,7 +15,6 @@ app.use({
   onStateChange: () => {
     const state = app._store.getState();
     const { currentUser } = state;
-    console.log('oooooooooooo', currentUser)
     localStorage.setItem('reduxState', JSON.stringify({
       currentUser
     }));

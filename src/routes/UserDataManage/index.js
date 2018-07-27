@@ -8,12 +8,9 @@ import _ from 'lodash'
 import columns from './column';
 import styles from './index.less'
 
-const storageState = JSON.parse(localStorage.getItem('reduxState'))
-const jumped = _.get(storageState, 'currentUser.jumped')
-
 const UserDataManage = ({ dispatch, userDataManagement }) => {
   const { userInfo, pageInfo, total, loading } = userDataManagement
-  return jumped !== '0' ? (
+  return (
     <div className={styles.container}>
       <Spin spinning={loading > 0}>
         <div className={styles.title}>用户管理</div>
@@ -34,7 +31,7 @@ const UserDataManage = ({ dispatch, userDataManagement }) => {
         </div>
       </Spin>
     </div>
-  ) : null
+  )
 }
 
 const mapStateToProps = ({ userDataManagement }) => ({

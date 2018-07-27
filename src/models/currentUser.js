@@ -9,7 +9,6 @@ export default {
     authCode: null,
     token: null,
     corpId: null,
-    jumped: '0',
   },
 
   subscriptions: {
@@ -41,10 +40,8 @@ export default {
       if (data) {
         const corpId = _.get(data, 'corp_id');
         const token = _.get(data, 'access_token');
-        console.log('iiiiiiiii', token)
         yield put({ type: 'setToken', payload: token })
         yield put({ type: 'setCorpId', payload: corpId })
-        yield put({ type: 'setJumped', payload: '1' })
         window.location.href = 'https://weixin.flexceed.com'
       }
     },
@@ -60,8 +57,5 @@ export default {
     setCorpId(state, { payload }) {
       return { ...state, corpId: payload }
     },
-    setJumped(state, { payload }) {
-      return { ...state, jumped: payload }
-    }
   }
 }
