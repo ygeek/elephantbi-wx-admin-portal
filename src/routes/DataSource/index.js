@@ -11,7 +11,7 @@ const DataSource = ({ dispatch, dataSource }) => {
   const toUserList = () => {
     dispatch(routerRedux.push('/'))
   }
-  const { dataSourceList, currentViewUser, pageInfo } = dataSource
+  const { dataSourceList, currentViewUser, pageInfo, total } = dataSource
   return (
     <div className={styles.container}>
       <div className={styles.goback}>
@@ -28,7 +28,11 @@ const DataSource = ({ dispatch, dataSource }) => {
             onChange: (page, pageSize) => {
               dispatch({ type: 'dataSource/setPageInfo', payload: { page, pageSize } });
               dispatch({ type: 'dataSource/fetchDataSourceList' })
-            }
+            },
+            total
+          }}
+          scroll={{
+            y: 600
           }}
         />
       </div>

@@ -8,7 +8,7 @@ import columns from './column';
 import styles from './index.less'
 
 const DashBoard = ({ dispatch, dashBoard }) => {
-  const { dashBoardList, pageInfo, currentViewUser } = dashBoard
+  const { dashBoardList, pageInfo, currentViewUser, total } = dashBoard
   const toUserList = () => {
     dispatch(routerRedux.push('/'))
   }
@@ -28,7 +28,11 @@ const DashBoard = ({ dispatch, dashBoard }) => {
             onChange: (page, pageSize) => {
               dispatch({ type: 'dashBoard/setPageInfo', payload: { page, pageSize } });
               dispatch({ type: 'dashBoard/fetchDashBoardList' })
-            }
+            },
+            total
+          }}
+          scroll={{
+            y: 600
           }}
         />
       </div>

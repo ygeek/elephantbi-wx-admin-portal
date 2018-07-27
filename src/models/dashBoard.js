@@ -12,7 +12,8 @@ export default {
     pageInfo: {
       page: 1,
       pageSize: 20,
-    }
+    },
+    total: 0,
   },
   
   subscriptions: {
@@ -21,6 +22,7 @@ export default {
         const { pathname } = location;
         const match = pathToRegexp('/dashBoard/:id').exec(pathname)
         if (match) {
+          dispatch({ type: 'clearState' })
           dispatch({ type: 'setUserId', payload: match[1] })
           dispatch({ type: 'fetchUsers' })
           dispatch({ type: 'fetchDashBoardList' })
@@ -47,6 +49,7 @@ export default {
       });
       if (data) {
         yield put({ type: 'setDashBoardList', payload: data.list })
+        yield put({ type: 'setTotalCount', payload: _.get(data, 'meta.total_count') })
       }
     },
 
@@ -74,6 +77,23 @@ export default {
 
     setPageInfo(state, { payload }) {
       return { ...state, pageInfo: payload }
+    },
+    setTotalCount(state, { payload }) {
+      return { ...state, total: payload }
+    },
+
+    clearState(state) {
+      return {
+        ...state,
+        dashBoardList: [],
+        userId: null,
+        currentViewUser: null,
+        pageInfo: {
+          page: 1,
+          pageSize: 20,
+        },
+        total: 0,
+      }
     }
   }
 }

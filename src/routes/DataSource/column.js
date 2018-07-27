@@ -16,7 +16,7 @@ const columns = (dispatch) => {
       title: '数据源类型',
       dataIndex: 'source_type',
       render(text, record) {
-        return text === 0 ? 'csv' : 'excel' 
+        return text === 0 ? 'Csv' : 'Excel' 
       }
     },
     {

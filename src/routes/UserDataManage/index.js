@@ -7,7 +7,7 @@ import columns from './column';
 import styles from './index.less'
 
 const UserDataManage = ({ dispatch, userDataManagement }) => {
-  const { userInfo, pageInfo } = userDataManagement
+  const { userInfo, pageInfo, total } = userDataManagement
   return (
     <div className={styles.container}>
       <div className={styles.title}>用户管理</div>
@@ -21,7 +21,11 @@ const UserDataManage = ({ dispatch, userDataManagement }) => {
             onChange: (page, pageSize) => {
               dispatch({ type: 'userDataManagement/setPageInfo', payload: { page, pageSize } });
               dispatch({ type: 'userDataManagement/fetchUserInfoList' })
-            }
+            },
+            total,
+          }}
+          scroll={{
+            y: 600
           }}
         />
       </div>
