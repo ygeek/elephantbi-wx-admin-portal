@@ -41,6 +41,7 @@ export default {
       if (data) {
         const corpId = _.get(data, 'corp_id');
         const token = _.get(data, 'access_token');
+        console.log('iiiiiiiii', token)
         yield put({ type: 'setToken', payload: token })
         yield put({ type: 'setCorpId', payload: corpId })
         yield put({ type: 'setJumped', payload: '1' })
