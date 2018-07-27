@@ -34,7 +34,7 @@ export default {
       const { userId } = yield select(state => state.dashBoard);
       const { data } = yield call(fetchUserInfoList);
       if (data) {
-        const currentViewUser = _.find(data.list, { id: parseInt(userId, 10) });
+        const currentViewUser = _.find(data, { id: parseInt(userId, 10) });
         yield put({ type: 'setCurrentViewUser', payload: currentViewUser })
       }
     },

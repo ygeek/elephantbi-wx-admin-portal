@@ -1,3 +1,4 @@
+import moment from 'moment'
 const columns = (dispatch) => {
   return [
     {
@@ -11,14 +12,20 @@ const columns = (dispatch) => {
       dataIndex: 'name',
     },
     {
-      key: 'type',
+      key: 'source_type',
       title: '数据源类型',
-      dataIndex: 'type',
+      dataIndex: 'source_type',
+      render(text, record) {
+        return text === 0 ? 'csv' : 'excel' 
+      }
     },
     {
       key: 'size',
       title: '容量',
       dataIndex: 'size',
+      render(text, record) {
+        return `${text}KB`
+      }
     },
     {
       key: 'description',
@@ -26,14 +33,20 @@ const columns = (dispatch) => {
       dataIndex: 'description',
     },
     {
-      key: 'create_at',
+      key: 'created_at',
       title: '创建时间',
-      dataIndex: 'create_at',
+      dataIndex: 'created_at',
+      render(text, record) {
+        return moment(text).format('YYYY-MM-DD')
+      }
     },
     {
-      key: 'update_at',
+      key: 'updated_at',
       title: '修改时间',
-      dataIndex: 'update_at',
+      dataIndex: 'updated_at',
+      render(text, record) {
+        return moment(text).format('YYYY-MM-DD')
+      }
     },
     {
       key: 'operator',

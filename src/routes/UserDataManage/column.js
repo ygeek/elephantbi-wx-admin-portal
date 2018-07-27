@@ -18,13 +18,16 @@ const columns = (dispatch) => {
     },
     {
       title: '电话',
-      key: 'phone',
-      dataIndex: 'phone',
+      key: 'mobile',
+      dataIndex: 'mobile',
     },
     {
       title: '是否管理员',
       key: 'is_admin',
       dataIndex: 'is_admin',
+      render(text, record) {
+        return text === 1 ? '是' : '否'
+      }
     },
     {
       title: '操作',

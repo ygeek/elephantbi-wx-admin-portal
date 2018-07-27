@@ -1,3 +1,4 @@
+import moment from 'moment'
 const columns = (dispatch) => {
   return [
     {
@@ -12,13 +13,19 @@ const columns = (dispatch) => {
     },
     {
       title: '创建时间',
-      key: 'create_at',
-      dataIndex: 'create_at',
+      key: 'created_at',
+      dataIndex: 'created_at',
+      render(text, record) {
+        return moment(text).format('YYYY-MM-DD')
+      }
     },
     {
       title: '修改时间',
-      key: 'update_at',
-      dataIndex: 'update_at',
+      key: 'updated_at',
+      dataIndex: 'updated_at',
+      render(text, record) {
+        return moment(text).format('YYYY-MM-DD')
+      }
     },
     {
       title: '操作',
