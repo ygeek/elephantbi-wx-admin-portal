@@ -14,7 +14,7 @@ class Navigator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: '1'
+      activeTab: window.location.pathname === '/accountCancellation' ? '2' : '1'
     }
   }
 
