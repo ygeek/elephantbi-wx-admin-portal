@@ -1,4 +1,6 @@
 import moment from 'moment'
+import Modal from 'antd/lib/modal'
+import 'antd/lib/modal/style/css'
 const columns = (dispatch) => {
   return [
     {
@@ -34,7 +36,16 @@ const columns = (dispatch) => {
         return (
           <a
             onClick={() => {
-              dispatch({ type: 'dashBoard/deleteDashBoard', payload: record.id })
+              Modal.confirm({
+                title: '删除仪表盘',
+                content: '仪表盘删除后无法恢复，是否确认',
+                onOk() {
+                  dispatch({ type: 'dashBoard/deleteDashBoard', payload: record.id })
+                },
+                okText: '确认',
+                cancelText: '取消'
+              })
+              
             }}>
             删除
         </a>

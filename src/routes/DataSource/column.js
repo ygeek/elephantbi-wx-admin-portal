@@ -1,4 +1,6 @@
 import moment from 'moment'
+import Modal from 'antd/lib/modal'
+import 'antd/lib/modal/style/css'
 const columns = (dispatch) => {
   return [
     {
@@ -55,7 +57,15 @@ const columns = (dispatch) => {
         return (
           <a
           onClick={() => {
-            dispatch({ type: 'dataSource/deleteDataSource', payload: record.id })
+            Modal.confirm({
+              title: '删除数据源',
+              content: '删除数据源，会一起删除所有关联的图表，是否确认',
+              onOk() {
+                dispatch({ type: 'dataSource/deleteDataSource', payload: record.id })
+              },
+              okText: '确认',
+              cancelText: '取消'
+            })
           }}>
             删除
           </a>
