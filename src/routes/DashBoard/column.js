@@ -4,11 +4,6 @@ import 'antd/lib/modal/style/css'
 const columns = (dispatch) => {
   return [
     {
-      title: 'ID',
-      key: 'id',
-      dataIndex: 'id',
-    },
-    {
       title: '名称',
       key: 'name',
       dataIndex: 'name',
