@@ -16,9 +16,12 @@ export default {
       history.listen((location) => {
         const { pathname, search } = location;
         const match = pathToRegexp('/(.*)').exec(pathname);
+        console.log('match', match)
         if (match) {
           if (search) {
+            console.log('search', search)
             const matchSearch = search.match(/auth_code=(.*)/)
+            console.log('matchsearch', matchSearch)
             if (matchSearch) {
               const authCode = matchSearch[1]
               dispatch({ type: 'setAuthCode', payload: authCode });
@@ -37,11 +40,13 @@ export default {
         auth_code: authCode,
         env: window.env,
       })
+      console.log('data', data)
       if (data) {
         const corpId = _.get(data, 'corp_id');
         const token = _.get(data, 'access_token');
         yield put({ type: 'setToken', payload: token })
         yield put({ type: 'setCorpId', payload: corpId })
+        console.log('jump')
         window.location.href = 'https://weixin.flexceed.com'
       }
     },
