@@ -36,6 +36,9 @@ const DataSource = ({ dispatch, dataSource }) => {
               },
               total
             }}
+            locale={{
+              emptyText: '当前数据为空'
+            }}
           />
         </div>
       </Spin>

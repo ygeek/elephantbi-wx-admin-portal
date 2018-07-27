@@ -36,6 +36,9 @@ const DashBoard = ({ dispatch, dashBoard }) => {
                 },
                 total
               }}
+              locale={{
+                emptyText: '当前数据为空'
+              }}
             />
           </div>
       </Spin>
