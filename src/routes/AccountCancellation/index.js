@@ -17,7 +17,7 @@ const AccountCancellation = () => {
         <div className={styles.title}>使用场景</div>
         <div className={styles.content}>使用ElephantBI一段时间后，不再使用，想清除所有数据，包括帐号信息</div>
         <div className={styles.title}>操作步骤</div>
-        <div>联系ElephantBI官方客服电话，0411-xxxxxxxx，向客服申请注销企业，经审核后由ElephantBI安排工作人员注销企业帐号</div>
+        <div>联系ElephantBI官方客服电话，0411-39026089，向客服申请注销企业，经审核后由ElephantBI安排工作人员注销企业帐号</div>
       </div>
     </div>
   )
