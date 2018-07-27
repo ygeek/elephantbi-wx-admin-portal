@@ -13,7 +13,7 @@ const jumped = _.get(storageState, 'currentUser.jumped')
 
 const UserDataManage = ({ dispatch, userDataManagement }) => {
   const { userInfo, pageInfo, total, loading } = userDataManagement
-  return jumped === '1' ? (
+  return jumped !== '0' ? (
     <div className={styles.container}>
       <Spin spinning={loading > 0}>
         <div className={styles.title}>用户管理</div>
