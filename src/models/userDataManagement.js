@@ -19,7 +19,7 @@ export default {
     setup({ dispatch, history }) {
       history.listen((location) => {
         const { pathname } = location;
-        const match = pathToRegexp('/').exec(pathname)
+        const match = pathToRegexp('/userDataManagement').exec(pathname)
         if (match) {
           dispatch({ type: 'fetchUserInfoList' })
         }
