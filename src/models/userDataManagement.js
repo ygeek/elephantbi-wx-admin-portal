@@ -45,6 +45,7 @@ export default {
   
   reducers: {
     setUserInfoList(state, { payload }) {
+      console.log('userlistdata', payload)
       return { ...state, userInfo: payload }
     },
     setPageInfo(state, { payload }) {
