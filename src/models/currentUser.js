@@ -55,7 +55,7 @@ export default {
               return 'weixin.elephantbi.com';
           }
         }
-        window.location.href = getserverhost(window.env);
+        window.location.href = `https://${getserverhost(window.env)}`;
       }
     },
   },
