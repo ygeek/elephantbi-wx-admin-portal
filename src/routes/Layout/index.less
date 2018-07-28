@@ -1,12 +1,17 @@
 .container {
   height: 100%;
-  width: 1200px;
+  min-width: 1200px;
+  width: 100%;
   margin: auto;
   .content {
-    height: calc(~"100% - 50px");
-    width: 1000px;
+    width: 1200px;
     margin: auto;
   }
+}
+
+.spiningPage {
+  height: 100%;
+  width: 100%;
 }
 
 :global(.ant-table-pagination) {
@@ -16,6 +21,12 @@
 
 :global(.ant-table) {
   th, td {
-    padding: 10px !important;
+    padding: 8px !important;
+    text-align: center !important;
+    font-size: 12px !important
   }
+}
+
+:global(.ant-confirm-title) {
+  overflow: hidden !important;
 }

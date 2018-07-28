@@ -1,6 +1,8 @@
 import fetch from 'dva/fetch';
 import _ from 'lodash';
 import urljoin from 'url-join';
+import Message from 'antd/lib/message'
+import 'antd/lib/message/style/css'
 import { HOST } from 'constants/APIConstants';
 import jsonToQuery from 'utils/url_helper';
 
@@ -8,7 +10,18 @@ function parseJSON(response) {
   return response.json();
 }
 
+const getHost = () => {
+  const storageState = JSON.parse(localStorage.getItem('reduxState'));
+  const corpId = _.get(storageState, 'currentUser.corpId');
+  // const corpId = "wwbf3eaab416f2a8a4";
+  const matchHost = /^(.*)\/\/(.*)$/.exec(HOST)
+  return `${matchHost[1]}//wx_${corpId}.${matchHost[2]}`
+}
+
 function checkStatus(response) {
+  if (response.status === 502) {
+    Message.error('当前网络连接异常，请稍后重试');
+  }
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -19,7 +32,7 @@ function checkStatus(response) {
 }
 
 export function requestUrl({ host, url, params }) {
-  const reqHost = host || HOST;
+  const reqHost = host || getHost();
   const queryString = _.isEmpty(params) ? '' : jsonToQuery(params);
   if (queryString) {
     return `${urljoin(reqHost, url)}${queryString}`;
@@ -69,6 +82,7 @@ export function requestSimple({ url, method, headers, params, body, token, host 
     headers: _.pickBy({
       'Content-Type': 'application/json',
       Authorization: `jwt ${requestHeaders.token}`,
+      // Authorization: `jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzUyNTAzMDgsImlhdCI6MTUzMjY1ODMwOCwibmJmIjoxNTMyNjU4MzA4LCJpZGVudGl0eSI6MTU1fQ.NhJt6t-4zZK7T-TuGC0fTDtw_xHH2p5PueL1yxKmSK4`,
       ...headers
     }),
     body: JSON.stringify(body)

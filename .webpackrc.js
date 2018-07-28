@@ -4,7 +4,7 @@ export default {
   "entry": "src/index.js",
   "hash": true,
   "outputPath": "./dist",
-  "publicPath": "",
+  "publicPath": "/",
   "html": { "template": "./src/index.ejs" },
   "alias": {
     "src": path.resolve(__dirname, "./src"),
