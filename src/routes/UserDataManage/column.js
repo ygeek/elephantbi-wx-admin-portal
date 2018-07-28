@@ -1,11 +1,7 @@
 import { routerRedux } from 'dva/router';
+import _ from 'lodash'
 const columns = (dispatch) => {
   return [
-    {
-      title: '用户ID',
-      key: 'id',
-      dataIndex: 'id',
-    },
     {
       title: '姓名',
       key: 'name',
@@ -15,16 +11,25 @@ const columns = (dispatch) => {
       title: 'Email',
       key: 'email',
       dataIndex: 'email',
+      render(text, record) {
+        if (_.get(record, 'fake_email') === 0) {
+          return text
+        }
+        return null
+      }
     },
     {
       title: '电话',
-      key: 'phone',
-      dataIndex: 'phone',
+      key: 'mobile',
+      dataIndex: 'mobile',
     },
     {
       title: '是否管理员',
       key: 'is_admin',
       dataIndex: 'is_admin',
+      render(text, record) {
+        return text === 1 ? '是' : '否'
+      }
     },
     {
       title: '操作',
@@ -38,6 +43,14 @@ const columns = (dispatch) => {
             }}>
               仪表盘
             </a>
+            <div style={{
+              display: 'inline-block',
+              width: 0,
+              height: '14px',
+              margin: '0 5px',
+              marginBottom: '-3px',
+              border: '0.5px solid #aaa'
+            }} />
             <a onClick={() => {
               dispatch(routerRedux.push(`/dataSource/${id}`))
             }}>
