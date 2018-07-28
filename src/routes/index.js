@@ -26,10 +26,10 @@ const creatRoute = (app, goBack) => {
   const AccountCancellation = creatDynamic({
     component: () => import('./AccountCancellation'),
   })
-
+  console.log('route/index.js')
   return (
     <Switch>
-      <Route exact path="/" component={UserDataManage} />
+      <Route exact path="/" component={UserDataManage}/>
       <Route path="/dashBoard/:id" component={DashBoard} />
       <Route path="/dataSource/:id" component={DataSource} />
       <Route path="/accountCancellation" component={AccountCancellation} />

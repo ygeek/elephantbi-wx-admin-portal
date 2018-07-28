@@ -43,7 +43,19 @@ export default {
         const token = _.get(data, 'access_token');
         yield put({ type: 'setToken', payload: token })
         yield put({ type: 'setCorpId', payload: corpId })
-        window.location.href = 'https://weixin.flexceed.com'
+
+        const getserverhost = (env) => {
+          switch(env) {
+            case 'develop':
+              return 'weixin.flexceed.com';
+            case 'stage':
+              return 'weixin.visionpsn.com';
+            case 'product':
+            default :
+              return 'weixin.elephantbi.com';
+          }
+        }
+        window.location.href = `https://${getserverhost(window.env)}`;
       }
     },
   },
