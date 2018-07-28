@@ -18,7 +18,7 @@ const RouterConfig = ({ history, app }) => {
   const Layout = creatDynamic({
     component: () => import('./routes/Layout')
   })
-
+  console.log('router.js')
   return (
     <Router history={history}>
       <Route path="/" component={() => {
