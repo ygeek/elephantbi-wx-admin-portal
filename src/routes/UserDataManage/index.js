@@ -10,6 +10,7 @@ import styles from './index.less'
 
 const UserDataManage = ({ dispatch, userDataManagement }) => {
   const { userInfo, pageInfo, total, loading } = userDataManagement
+  console.log('userlistModel', userDataManagement)
   return (
     <div className={styles.container}>
       <Spin spinning={loading > 0}>

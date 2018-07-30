@@ -29,10 +29,7 @@ const creatRoute = (app, goBack) => {
   console.log('route/index.js')
   return (
     <Switch>
-      <Route exact path="/" component={() => {
-        console.log('userDatamanage')
-        return <UserDataManage />
-      }} />
+      <Route exact path="/" component={UserDataManage}/>
       <Route path="/dashBoard/:id" component={DashBoard} />
       <Route path="/dataSource/:id" component={DataSource} />
       <Route path="/accountCancellation" component={AccountCancellation} />
