@@ -2,7 +2,7 @@ import pathToRegexp from 'path-to-regexp';
 import _ from 'lodash'
 import Message from 'antd/lib/message'
 import 'antd/lib/message/style/css'
-import { redirect } from '../services/example'
+import { redirect, fetchUserProfile } from '../services/example'
 
 const getWebsitehost = (env) => {
   switch(env) {
@@ -40,6 +40,7 @@ export default {
             }
           } else {
             dispatch({ type: 'checkToken' })
+            dispatch({ type: 'fetchUserProfile' })
           }
         }
       })
@@ -78,10 +79,24 @@ export default {
       const { token } = yield select(state => state.currentUser);
       console.log('checkToken token', token)
       if (!token) {
+        console.log('无token')
         Message.warning('您没有访问权限，请返回主页重新登录')
         setTimeout(() => {
           window.location.href = `https://${getWebsitehost(window.env)}`;
         }, 2000)
+      }
+    },
+
+    * fetchUserProfile(action, { call }) {
+      const { data, err } = yield call(fetchUserProfile);
+      if (err) {
+        if (err.status === 401) {
+          console.log('token已过期')
+          Message.warning('登录凭证已过期，请返回首页重新登录');
+          setTimeout(() => {
+            window.location.href = `https://${getWebsitehost(window.env)}`;
+          }, 2000)
+        }
       }
     },
 

@@ -9,19 +9,6 @@ import jsonToQuery from 'utils/url_helper';
 function parseJSON(response) {
   return response.json();
 }
-
-const getWebsitehost = (env) => {
-  switch(env) {
-    case 'develop':
-      return 'www.flexceed.com';
-    case 'stage':
-      return 'www.visionpsn.com';
-    case 'product':
-    default:
-      return 'www.elephantbi.com';
-  }
-}
-
 const getHost = () => {
   const storageState = JSON.parse(localStorage.getItem('reduxState'));
   const corpId = _.get(storageState, 'currentUser.corpId');
@@ -33,12 +20,6 @@ const getHost = () => {
 function checkStatus(response) {
   if (response.status === 502) {
     Message.error('当前网络连接异常，请稍后重试');
-  }
-  if (response.status === 401) {
-    Message.warning('登录凭证已过期，请返回首页重新登录');
-    setTimeout(() => {
-      window.location.href = `https://${getWebsitehost(window.env)}`;
-    }, 2000)
   }
   if (response.status >= 200 && response.status < 300) {
     return response;

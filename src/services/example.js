@@ -48,3 +48,13 @@ export async function deleteDataSource(id) {
     method: 'delete'
   })
 }
+
+export async function fetchUserProfile() {
+  return requestSimple({
+    url: '/user/profile',
+    method: 'GET',
+    params: {
+      check_wx_admin: 1
+    }
+  })
+}
