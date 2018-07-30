@@ -58,6 +58,23 @@ export default {
         window.location.href = `https://${getserverhost(window.env)}`;
       }
     },
+
+    * clearLocalToken(action, { select, call, put }) {
+      yield put({ type: 'clearState' });
+      localStorage.removeItem('reduxState');
+      const getWebsitehost = (env) => {
+        switch(env) {
+          case 'develop':
+            return 'www.flexceed.com';
+          case 'stage':
+            return 'www.visionpsn.com';
+          case 'product':
+          default:
+            return 'www.elephantbi.com';
+        }
+      }
+      window.location.href = `https://${getWebsitehost(window.env)}`
+    }
   },
 
   reducers: {
@@ -70,5 +87,13 @@ export default {
     setCorpId(state, { payload }) {
       return { ...state, corpId: payload }
     },
+    clearState(state, { payload }) {
+      return {
+        ...state,
+        authCode: null,
+        token: null,
+        corpId: null,
+      }
+    }
   }
 }
