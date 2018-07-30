@@ -37,9 +37,9 @@ export default {
               const authCode = matchSearch[1]
               dispatch({ type: 'setAuthCode', payload: authCode });
               dispatch({ type: 'login' })
-            } else {
-              dispatch({ type: 'checkToken' })
             }
+          } else {
+            dispatch({ type: 'checkToken' })
           }
         }
       })
@@ -76,6 +76,7 @@ export default {
 
     * checkToken(action, { select, call, put }) {
       const { token } = yield select(state => state.currentUser);
+      console.log('checkToken token', token)
       if (!token) {
         Message.warning('您没有访问权限，请返回主页重新登录')
         setTimeout(() => {
