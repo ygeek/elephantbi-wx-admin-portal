@@ -90,7 +90,7 @@ export default {
     * fetchUserProfile(action, { call }) {
       const { data, err } = yield call(fetchUserProfile);
       if (err) {
-        if (err.status === 401) {
+        if (err.response.status === 401) {
           console.log('token已过期')
           Message.warning('登录凭证已过期，请返回首页重新登录');
           setTimeout(() => {
