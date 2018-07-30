@@ -1,6 +1,20 @@
 import pathToRegexp from 'path-to-regexp';
 import _ from 'lodash'
+import Message from 'antd/lib/message'
+import 'antd/lib/message/style/css'
 import { redirect } from '../services/example'
+
+const getWebsitehost = (env) => {
+  switch(env) {
+    case 'develop':
+      return 'www.flexceed.com';
+    case 'stage':
+      return 'www.visionpsn.com';
+    case 'product':
+    default:
+      return 'www.elephantbi.com';
+  }
+}
 
 export default {
   namespace: 'currentUser',
@@ -16,7 +30,6 @@ export default {
       history.listen((location) => {
         const { pathname, search } = location;
         const match = pathToRegexp('/(.*)').exec(pathname);
-        console.log('match', match)
         if (match) {
           if (search) {
             const matchSearch = search.match(/auth_code=(.*)/)
@@ -24,6 +37,8 @@ export default {
               const authCode = matchSearch[1]
               dispatch({ type: 'setAuthCode', payload: authCode });
               dispatch({ type: 'login' })
+            } else {
+              dispatch({ type: 'checkToken' })
             }
           }
         }
@@ -59,20 +74,19 @@ export default {
       }
     },
 
+    * checkToken(action, { select, call, put }) {
+      const { token } = yield select(state => state.currentUser);
+      if (!token) {
+        Message.warning('您没有访问权限，请返回主页重新登录')
+        setTimeout(() => {
+          window.location.href = `https://${getWebsitehost(window.env)}`;
+        }, 2000)
+      }
+    },
+
     * clearLocalToken(action, { select, call, put }) {
       yield put({ type: 'clearState' });
       localStorage.removeItem('reduxState');
-      const getWebsitehost = (env) => {
-        switch(env) {
-          case 'develop':
-            return 'www.flexceed.com';
-          case 'stage':
-            return 'www.visionpsn.com';
-          case 'product':
-          default:
-            return 'www.elephantbi.com';
-        }
-      }
       window.location.href = `https://${getWebsitehost(window.env)}`
     }
   },
