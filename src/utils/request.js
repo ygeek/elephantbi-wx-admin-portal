@@ -9,7 +9,6 @@ import jsonToQuery from 'utils/url_helper';
 function parseJSON(response) {
   return response.json();
 }
-
 const getHost = () => {
   const storageState = JSON.parse(localStorage.getItem('reduxState'));
   const corpId = _.get(storageState, 'currentUser.corpId');

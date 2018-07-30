@@ -1,6 +1,20 @@
 import pathToRegexp from 'path-to-regexp';
 import _ from 'lodash'
-import { redirect } from '../services/example'
+import Message from 'antd/lib/message'
+import 'antd/lib/message/style/css'
+import { redirect, fetchUserProfile } from '../services/example'
+
+const getWebsitehost = (env) => {
+  switch(env) {
+    case 'develop':
+      return 'www.flexceed.com';
+    case 'stage':
+      return 'www.visionpsn.com';
+    case 'product':
+    default:
+      return 'www.elephantbi.com';
+  }
+}
 
 export default {
   namespace: 'currentUser',
@@ -16,7 +30,6 @@ export default {
       history.listen((location) => {
         const { pathname, search } = location;
         const match = pathToRegexp('/(.*)').exec(pathname);
-        console.log('match', match)
         if (match) {
           if (search) {
             const matchSearch = search.match(/auth_code=(.*)/)
@@ -25,6 +38,9 @@ export default {
               dispatch({ type: 'setAuthCode', payload: authCode });
               dispatch({ type: 'login' })
             }
+          } else {
+            dispatch({ type: 'checkToken' })
+            dispatch({ type: 'fetchUserProfile' })
           }
         }
       })
@@ -58,6 +74,37 @@ export default {
         window.location.href = `https://${getserverhost(window.env)}`;
       }
     },
+
+    * checkToken(action, { select, call, put }) {
+      const { token } = yield select(state => state.currentUser);
+      console.log('checkToken token', token)
+      if (!token) {
+        console.log('无token')
+        Message.warning('您没有访问权限，请返回主页重新登录')
+        setTimeout(() => {
+          window.location.href = `https://${getWebsitehost(window.env)}`;
+        }, 2000)
+      }
+    },
+
+    * fetchUserProfile(action, { call }) {
+      const { data, err } = yield call(fetchUserProfile);
+      if (err) {
+        if (err.response.status === 401) {
+          console.log('token已过期')
+          Message.warning('登录凭证已过期，请返回首页重新登录');
+          setTimeout(() => {
+            window.location.href = `https://${getWebsitehost(window.env)}`;
+          }, 2000)
+        }
+      }
+    },
+
+    * clearLocalToken(action, { select, call, put }) {
+      yield put({ type: 'clearState' });
+      localStorage.removeItem('reduxState');
+      window.location.href = `https://${getWebsitehost(window.env)}`
+    }
   },
 
   reducers: {
@@ -70,5 +117,13 @@ export default {
     setCorpId(state, { payload }) {
       return { ...state, corpId: payload }
     },
+    clearState(state, { payload }) {
+      return {
+        ...state,
+        authCode: null,
+        token: null,
+        corpId: null,
+      }
+    }
   }
 }

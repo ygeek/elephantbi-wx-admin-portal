@@ -20,6 +20,11 @@ class Navigator extends React.Component {
 
   render() {
     const { dispatch } = this.props;
+
+    const logOut = () => {
+      dispatch({ type: 'currentUser/clearLocalToken' })
+    }
+
     const tabsOnChange = (key) => {
       if (key === "1") {
         dispatch(routerRedux.push('/'))
@@ -38,6 +43,12 @@ class Navigator extends React.Component {
           <TabPane tab={<span><img src={dataIcon} alt="" />用户数据管理</span>} key="1" />
           <TabPane tab={<span><img src={cancelIcon} alt="" />企业帐号注销</span>} key="2" />
         </Tabs>
+        <button
+          className={styles.logOut}
+          onClick={logOut}
+        >
+        登出
+        </button>
       </div>
     )
   }
